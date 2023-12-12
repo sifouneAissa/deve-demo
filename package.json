@@ -1,0 +1,24 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "@inertiajs/inertia": "^0.11.0",
+        "@inertiajs/inertia-react": "^0.8.1",
+        "@inertiajs/progress": "^0.2.6",
+        "@vitejs/plugin-react": "^3.0.0",
+        "axios": "^1.1.2",
+        "laravel-vite-plugin": "^0.7.2",
+        "lodash": "^4.17.19",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "@headlessui/react": "^1.7.11",
+        "antd": "^5.1.2",
+        "antd-css-utilities": "^1.0.3"
+    }
+}
