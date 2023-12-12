@@ -40,5 +40,26 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_admin' => 'boolean'
     ];
+
+    protected  $appends =  [
+            'age'
+        ];
+
+    function calculateAge($birthdate) {
+        // Create DateTime objects for birthdate and current date
+        $birthdate = new \DateTime($birthdate);
+        $currentDate = new \DateTime();
+
+        // Calculate the difference between dates
+        $age = $currentDate->diff($birthdate);
+
+        // Return the years from the difference
+        return $age->y;
+    }
+
+    public function getAgeAttribute(){
+        return $this->calculateAge($this->birth);
+    }
 }

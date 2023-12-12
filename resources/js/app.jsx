@@ -8,8 +8,11 @@ import { createInertiaApp } from '@inertiajs/inertia-react';
 import { InertiaProgress } from '@inertiajs/progress';
 import { ConfigProvider } from 'antd';
 import theme from './theme';
+import {Footer} from "antd/es/layout/layout";
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+
+
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -26,6 +29,8 @@ createInertiaApp({
             theme={theme}
         >
             <App {...props} />
+            <Footer > <p>&copy; 2023 Developatic demo. All rights reserved.</p></Footer>
+
         </ConfigProvider>;
 
         root.render(app);
