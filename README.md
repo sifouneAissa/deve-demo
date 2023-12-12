@@ -1,12 +1,6 @@
-# Laravel Inertia React Antd Starter
+# Laravel Inertia React Antd
 
-Use this command to create a new project using this starter:
-
-## Installation
-
-```sh
-composer create-project khatriafaz/laravel-inertia-react-antd-starter
-```
+Use this command :
 
 Install npm packages:
 ```sh
