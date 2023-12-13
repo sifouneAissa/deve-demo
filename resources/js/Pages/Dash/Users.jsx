@@ -1,5 +1,6 @@
 import React, {useEffect,useState } from 'react';
-import { Space, Table, Tag,Modal  } from 'antd';
+import {Space, Table, Tag, Modal, Button, Form} from 'antd';
+import {Inertia} from "@inertiajs/inertia";
 const { Column, ColumnGroup } = Table;
 
 const data = [
@@ -77,7 +78,6 @@ export default function Users() {
     }
 
     function deleteUser(item){
-        console.log(item);
             axios.delete(`/user/${item.key}`)
                 .then(response => {
                     console.log('User deleted:', item);
@@ -88,9 +88,17 @@ export default function Users() {
                     console.error('Error deleting user:', error);
                 });
     }
-
+    const handleButtonClick = () => {
+        Inertia.visit(route('user.create'));
+    };
     return (
         <>
+
+            <Space size={20} className="float-right mt-5" >
+                <Button type="primary"  onClick={handleButtonClick} >
+                    Add User
+                </Button>
+            </Space>
             <Table
             dataSource={userData}
             pagination={paginationInfo}
@@ -113,7 +121,7 @@ export default function Users() {
                         console.error('Error fetching data:', error);
                     });
             }}
-            >
+                >
                 <Column title="Name" dataIndex="name"  />
                 <Column title="Email" dataIndex="email"  />
                 <Column title="Age (Years)" dataIndex="age"  />

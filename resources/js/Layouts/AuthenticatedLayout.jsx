@@ -54,7 +54,7 @@ export default function Authenticated({ header, children }) {
         <Layout className='app-layout'>
             <Sider trigger={null} collapsible collapsed={collapsed}>
                 <div className="logo">
-                    <Typography.Title className='logo-text' level={3}>{collapsed ? 'LISA' : 'Laravel Inertia Starter App'}</Typography.Title>
+                    <Typography.Title className='logo-text' level={3}>{collapsed ? 'LISA' : 'Laravel Inertia React App'}</Typography.Title>
                 </div>
                 <Menu
                     theme="dark"

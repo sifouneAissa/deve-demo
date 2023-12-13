@@ -1,6 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, } from '@inertiajs/inertia-react';
-import { Card, Typography,message as antdMessage } from 'antd';
+import {Card, Typography, message as antdMessage, Button} from 'antd';
 import Users from "@/Pages/Dash/Users";
 import { useEffect } from 'react';
 

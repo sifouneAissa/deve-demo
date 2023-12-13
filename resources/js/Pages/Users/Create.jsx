@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
 import {Button, Card, Form, Input, Typography, Checkbox, Space, DatePicker, message as antdMessage} from 'antd';
+import {Inertia} from "@inertiajs/inertia";
 
 function Create(props) {
 
@@ -23,14 +24,16 @@ function Create(props) {
 
     const submit = () => {
         post(route('user.store'));
+        Inertia.visit(route('dashboard'));
     };
 
     return (
         <>
-            <Head title="Register" />
+            <Head title="Add User" />
 
             <Card className='auth-card '>
-                <Typography.Title style={{ fontWeight: 400, marginBottom: 30 }} level={4}>Register with Laravel Inertia Starter</Typography.Title>
+
+                <Typography.Title style={{ fontWeight: 400, marginBottom: 30 }} level={4}>Laravel Inertia React App</Typography.Title>
 
                 <Form
                     name="basic"
@@ -92,7 +95,7 @@ function Create(props) {
 
                     <Space size={16}>
                         <Button type="primary" htmlType="submit" loading={processing}>
-                            Register
+                            Submit
                         </Button>
                     </Space>
                 </Form>

@@ -35,7 +35,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
 
     Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard')->with(['message' => 'hello']);
+        return Inertia::render('Dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
 
 

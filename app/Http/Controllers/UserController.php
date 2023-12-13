@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserCreateRequest;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class UserController extends Controller
                 'email',
                 'birth',
                 'id',
-            ])->paginate(15);
+            ])->orderBy('created_at','desc')->paginate(15);
             return response()->json($users);
     }
 
@@ -48,10 +49,11 @@ class UserController extends Controller
      */
     public function store(UserCreateRequest $request)
     {
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'birth' => $request->birth,
+            'birth' => Carbon::parse($request->birth),
             'password' => Hash::make($request->password),
         ]);
 

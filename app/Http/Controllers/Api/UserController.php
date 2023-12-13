@@ -17,7 +17,7 @@ class UserController extends Controller
         $searchResults = User::query()->where(function ($query) use ($searchString) {
             $query->where('name', 'like', "%$searchString%")
                 ->orWhere('email', 'like', "%$searchString%");
-        })
+         })
             ->where('is_admin', false)
             ->select(['id','name','email','birth'])
             ->get();
