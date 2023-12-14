@@ -1,6 +1,10 @@
 # Laravel Inertia React Antd
 
 Use this command :
+Install composer packages:
+```sh
+composer install
+```
 
 Install npm packages:
 ```sh
