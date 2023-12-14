@@ -17,6 +17,7 @@ class UserController extends Controller
 {
     //
 
+
     public function index(Request $request){
             $users = User::query()->where('is_admin',false)->select([
                 'name',

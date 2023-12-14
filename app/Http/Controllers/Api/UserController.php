@@ -3,11 +3,30 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\AdminLoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
+
 class UserController extends Controller
 {
+
+    public function login(AdminLoginRequest $request)
+    {
+
+        if (Auth::attempt(array_merge($request->only('email', 'password'),['is_admin' => true]))) {
+            $user = Auth::user();
+            $token = $user->createToken('authToken')->plainTextToken;
+
+            return response()->json(['token' => $token], 200);
+        }
+
+        throw ValidationException::withMessages([
+            'email' => ['The provided credentials are incorrect.'],
+        ]);
+    }
 
 
     function searchUsers(Request $request)

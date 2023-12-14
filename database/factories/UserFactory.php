@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -51,10 +52,21 @@ class UserFactory extends Factory
 
     public function isAdmin($isAdmin)
     {
-        return $this->state(function (array $attributes) use ($isAdmin) {
-            return [
-                'is_admin' => $isAdmin,
-            ];
+
+        $nColumns = [
+            'is_admin' => $isAdmin,
+        ];
+
+        if($isAdmin){
+           $dEmail = "admin@something.com";
+           $gEmail = User::query()->where('email',$dEmail)->exists();
+           if($gEmail)  $dEmail = fake()->unique()->safeEmail();
+
+           $nColumns['email'] = $dEmail;
+        }
+
+        return $this->state(function (array $attributes) use ($isAdmin,$nColumns) {
+            return $nColumns;
         });
     }
 
