@@ -60,11 +60,12 @@ class UserController extends Controller
     function findUserPairsByAgeSum(array $users, $targetSum): array {
         $pairs = [];
 
+
         foreach ($users as $index1 => $user1) {
 
             foreach ($users as $index2 => $user2) {
-                if ($index1 !== $index2 && ($user1['age'] + $user2['age'] === $targetSum)) {
 
+                if ($index1 !== $index2 && ($user1['age'] + $user2['age'] === $targetSum)) {
                     $pairs[] = [$user1, $user2];
                 }
             }

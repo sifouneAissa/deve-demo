@@ -23,8 +23,18 @@ function Create(props) {
     },  []);
 
     const submit = () => {
-        post(route('user.store'));
-        Inertia.visit(route('dashboard'));
+
+        post(route('user.store'),{
+            onError (){
+                antdMessage.error("Error occurred");
+            },
+            onSuccess () {
+                antdMessage.success("User Created");
+                Inertia.visit(route('user.index'));
+            }
+        });
+
+
     };
 
     return (

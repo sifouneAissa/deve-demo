@@ -1,39 +1,12 @@
 import React, {useEffect,useState } from 'react';
-import {Space, Table, Tag, Modal, Button, Form} from 'antd';
+import {Space, Table, Tag, Modal, Button, Form, message as antdMessage} from 'antd';
 import {Inertia} from "@inertiajs/inertia";
 const { Column, ColumnGroup } = Table;
-
-const data = [
-    {
-        key: '1',
-        firstName: 'John',
-        lastName: 'Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '2',
-        firstName: 'Jim',
-        lastName: 'Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        firstName: 'Joe',
-        lastName: 'Black',
-        age: 32,
-        address: 'Sydney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-];
-
 
 export default function Users() {
 
 
+    const [modal, contextHolder] = Modal.useModal();
     const [paginationInfo, setPaginationInfo] = useState({});
     const [userData, setUserData] = useState([]);
     const [deleteModalVisible, setDeleteModalVisible] = useState(false);
@@ -60,7 +33,7 @@ export default function Users() {
     }, []); // Run this effect only once, similar to componentDidMount in class components
 
     function fetchData() {
-        axios.get('/user')
+        axios.get('/users')
             .then(response => {
                 setPaginationInfo({
                     current: response.data.current_page,
@@ -77,16 +50,22 @@ export default function Users() {
             });
     }
 
-    function deleteUser(item){
+    async function deleteUser(item) {
+
+        const confirmed = await modal.confirm({title: 'Are you sure?'});
+        if(confirmed) {
+
             axios.delete(`/user/${item.key}`)
                 .then(response => {
                     console.log('User deleted:', item);
-                    // After successful deletion, fetch updated data
                     fetchData();
+                    antdMessage.success("User Deleted");
                 })
                 .catch(error => {
                     console.error('Error deleting user:', error);
+                    antdMessage.success("Error occurred");
                 });
+        }
     }
     const handleButtonClick = () => {
         Inertia.visit(route('user.create'));
@@ -104,7 +83,7 @@ export default function Users() {
             pagination={paginationInfo}
             onChange={(pagination) => {
                 // Handle pagination change, for example, fetch new data for the next page
-                axios.get(`/user?page=${pagination.current}`)
+                axios.get(`/users?page=${pagination.current}`)
                     .then(response => {
 
                         setPaginationInfo({
@@ -129,7 +108,8 @@ export default function Users() {
                     title="Action"
                     render={(_, record) => (
                         <Space size="middle">
-                            <a onClick={() => deleteUser(record)}>Delete</a>
+                            <a onClick={() => deleteUser(record)} style={{ color: 'red' }}>Delete</a>
+                            {contextHolder}
                         </Space>
                     )}
                 />

@@ -16,16 +16,27 @@ use Inertia\Inertia;
 class UserController extends Controller
 {
     //
+    public $builder;
 
+    public function __construct()
+    {
+        $this->builder = User::query()->where('is_admin',false);
+    }
 
-    public function index(Request $request){
-            $users = User::query()->where('is_admin',false)->select([
+    public function indexAxios(Request $request){
+
+            $users = $this->builder->select([
                 'name',
                 'email',
                 'birth',
                 'id',
             ])->orderBy('created_at','desc')->paginate(15);
             return response()->json($users);
+    }
+
+    public function index(Request $request){
+
+        return Inertia::render('UsersIndex');
     }
 
 
@@ -60,4 +71,13 @@ class UserController extends Controller
 
         return redirect()->to(route('user.create'))->with(['message' => "$user->name has been successfully created"]);
     }
+
+
+    public function usersCount()
+    {
+        return response()->json($this->builder->count());
+    }
+
+
+
 }

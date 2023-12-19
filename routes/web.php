@@ -44,6 +44,11 @@ Route::middleware(['auth','isAdmin'])->group(function () {
         'index','destroy','create','store'
     ]);
 
+    Route::get('/users',[\App\Http\Controllers\UserController::class,'indexAxios'])->name('users.axios');
+    Route::get('/cusers',[\App\Http\Controllers\UserController::class,'usersCount'])->name('cusers.axios');
+
+
+
 });
 
 require __DIR__.'/auth.php';

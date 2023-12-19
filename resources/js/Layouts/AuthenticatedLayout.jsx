@@ -6,7 +6,8 @@ import {
     MenuUnfoldOutlined,
     UserOutlined,
     LogoutOutlined,
-    DownOutlined
+    DownOutlined,
+    DashboardOutlined
 } from '@ant-design/icons';
 import { Col, Layout, Menu, Row, theme, Typography, Space, Dropdown, Avatar } from 'antd';
 
@@ -63,10 +64,17 @@ export default function Authenticated({ header, children }) {
                     items={[
                         {
                             key: 'dashboard',
-                            icon: <UserOutlined />,
+                            icon: <DashboardOutlined  />,
                             label: <Link href={window.route('dashboard')}>
                                         Dashboard
                                    </Link>,
+                        },
+                        {
+                            key: 'user',
+                            icon: <UserOutlined />,
+                            label: <Link href={window.route('user.index')}>
+                                Users
+                            </Link>,
                         },
                     ]}
                 />

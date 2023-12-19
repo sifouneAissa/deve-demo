@@ -8,7 +8,7 @@ composer install
 
 Install npm packages:
 ```sh
-npm install
+npm installO
 ```
 
 ## Run the project
